@@ -3,16 +3,13 @@
    Usinagem e Solda de Precisão
    ============================================= */
 
-import { db, storage, auth } from './firebase-config.js';
+import { db, auth } from './firebase-config.js';
 import { requireAuth, logout } from './auth.js';
 import {
   doc, getDoc, setDoc, collection,
   getDocs, addDoc, updateDoc, deleteDoc,
   query, orderBy, serverTimestamp, Timestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import {
-  ref, uploadBytesResumable, getDownloadURL, deleteObject
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 /* ─── Utility ────────────────────────────────────────────────────────────── */
 const $ = (sel, ctx = document) => ctx.querySelector(sel);
@@ -92,24 +89,41 @@ function showConfirm(message, icon = '⚠️') {
   });
 }
 
-/* ─── Upload Image to Firebase Storage ──────────────────────────────────── */
-async function uploadImage(file, path, progressEl) {
+/* ─── Upload Image as Base64 (no Firebase Storage needed) ────────────────── */
+function uploadImageAsBase64(file, maxWidth = 800) {
   return new Promise((resolve, reject) => {
-    const storageRef = ref(storage, path);
-    const task = uploadBytesResumable(storageRef, file);
-    if (progressEl) {
-      progressEl.style.display = 'block';
-      const fill = progressEl.querySelector('.progress-bar-fill');
-      task.on('state_changed',
-        snap => { if (fill) fill.style.width = (snap.bytesTransferred / snap.totalBytes * 100) + '%'; },
-        reject,
-        async () => { resolve(await getDownloadURL(task.snapshot.ref)); progressEl.style.display = 'none'; }
-      );
-    } else {
-      task.on('state_changed', null, reject,
-        async () => resolve(await getDownloadURL(task.snapshot.ref))
-      );
+    if (file.size > 900 * 1024) {
+      reject(new Error('Imagem muito grande. Máximo 900KB.'));
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result;
+
+      // Small images (logos, icons) return as-is
+      if (!maxWidth || file.type === 'image/svg+xml' || file.size < 50 * 1024) {
+        resolve(dataUrl);
+        return;
+      }
+
+      // Resize larger images to save Firestore storage
+      const img = new Image();
+      img.onload = () => {
+        if (img.width <= maxWidth) { resolve(dataUrl); return; }
+        const canvas = document.createElement('canvas');
+        const ratio = maxWidth / img.width;
+        canvas.width = maxWidth;
+        canvas.height = img.height * ratio;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL('image/jpeg', 0.8));
+      };
+      img.onerror = () => resolve(dataUrl);
+      img.src = dataUrl;
+    };
+    reader.onerror = () => reject(new Error('Erro ao ler o arquivo.'));
+    reader.readAsDataURL(file);
   });
 }
 
@@ -216,13 +230,19 @@ function setupCompanyForm() {
       // Upload logo
       const logoFile = $('#empresa-logo-file')?.files[0];
       if (logoFile) {
-        data.logoUrl = await uploadImage(logoFile, `company/logo_${Date.now()}`, $('#logo-progress'));
+        const prog = $('#logo-progress');
+        prog.style.display = 'block'; prog.classList.add('loading');
+        data.logoUrl = await uploadImageAsBase64(logoFile, 400);
+        prog.style.display = 'none'; prog.classList.remove('loading');
       }
 
       // Upload hero image
       const heroFile = $('#empresa-hero-file')?.files[0];
       if (heroFile) {
-        data.heroImage = await uploadImage(heroFile, `company/hero_${Date.now()}`, $('#hero-progress'));
+        const prog = $('#hero-progress');
+        prog.style.display = 'block'; prog.classList.add('loading');
+        data.heroImage = await uploadImageAsBase64(heroFile, 1200);
+        prog.style.display = 'none'; prog.classList.remove('loading');
       }
 
       await setDoc(doc(db, 'company', 'main'), data, { merge: true });
@@ -449,7 +469,7 @@ function setupTestimonialsModal() {
     try {
       const photoFile = $('#test-photo-file')?.files[0];
       if (photoFile) {
-        data.photoUrl = await uploadImage(photoFile, `testimonials/photo_${Date.now()}`);
+        data.photoUrl = await uploadImageAsBase64(photoFile, 300);
       } else if (id) {
         const existing = testimonialsData.find(x => x.id === id);
         if (existing?.photoUrl) data.photoUrl = existing.photoUrl;
@@ -571,7 +591,7 @@ function setupClientsModal() {
     try {
       const logoFile = $('#cli-logo-file')?.files[0];
       if (logoFile) {
-        data.logoUrl = await uploadImage(logoFile, `clients/logo_${Date.now()}`);
+        data.logoUrl = await uploadImageAsBase64(logoFile, 400);
       } else if (id) {
         const existing = clientsData.find(x => x.id === id);
         if (existing?.logoUrl) data.logoUrl = existing.logoUrl;
