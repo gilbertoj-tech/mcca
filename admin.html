@@ -524,6 +524,23 @@
   });
 </script>
 
+<!-- Inline fallback: mostra erro se o módulo JS não carregar em 6s -->
+<script>
+  window.__adminLoaded = false;
+  setTimeout(function() {
+    if (!window.__adminLoaded) {
+      document.body.innerHTML =
+        '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;font-family:sans-serif;padding:32px;text-align:center;background:#111;color:#eee">' +
+        '<div style="font-size:48px;margin-bottom:16px">⚠️</div>' +
+        '<h2 style="margin:0 0 8px;font-size:20px">Erro ao carregar o painel</h2>' +
+        '<p style="margin:0 0 16px;color:#999;font-size:14px">O JavaScript do admin n\u00e3o carregou. Pode ser bloqueio de rede ou cache.</p>' +
+        '<p style="margin:0 0 16px;color:#999;font-size:13px">Tente:<br>1. Pressione Ctrl+F5 para recarregar<br>2. Verifique se alguma extens\u00e3o bloqueia <code>gstatic.com</code><br>3. Abra o console (F12) e veja erros em vermelho</p>' +
+        '<a href="admin.html" style="padding:10px 24px;background:#333;color:#fff;text-decoration:none;border-radius:6px">Tentar novamente</a>' +
+        '</div>';
+    }
+  }, 6000);
+</script>
+
 <script type="module" src="js/admin.js"></script>
 </body>
 </html>

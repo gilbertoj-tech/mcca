@@ -719,6 +719,8 @@ function setupLogout() {
 }
 
 /* ─── Init ───────────────────────────────────────────────────────────────── */
+window.__adminLoaded = true;
+
 requireAuth(async (user) => {
   // Show user email in sidebar
   const userEl = $('#sidebar-user');

@@ -15,13 +15,28 @@ import {
  * Chame esta função no topo de admin.html.
  */
 export function requireAuth(callback) {
+  let resolved = false;
+
   onAuthStateChanged(auth, (user) => {
+    if (resolved) return;
+    resolved = true;
+
     if (user) {
       if (callback) callback(user);
     } else {
+      window.__adminLoaded = true;
       window.location.href = 'login.html';
     }
   });
+
+  // Timeout de segurança: se o Firebase não responder em 8s, redireciona
+  setTimeout(() => {
+    if (!resolved) {
+      resolved = true;
+      window.__adminLoaded = true;
+      window.location.href = 'login.html';
+    }
+  }, 8000);
 }
 
 /**
