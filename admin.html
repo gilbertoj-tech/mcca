@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Painel Administrativo</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" type="image/svg+xml" href="assets/placeholder-logo.svg"/>
+  <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+
+<!-- Sidebar Overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<div class="admin-layout">
+
+  <!-- ═══════════ SIDEBAR ═══════════ -->
+  <aside class="sidebar" id="sidebar" role="navigation" aria-label="Menu administrativo">
+    <div class="sidebar-header">
+      <div class="sidebar-logo">
+        <img src="assets/placeholder-logo.svg" alt="Logo" id="sidebar-logo" style="height:32px;width:auto"/>
+        <div>
+          <div class="sidebar-name" id="sidebar-company">Painel Admin</div>
+          <div class="sidebar-badge">● SISTEMA ATIVO</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-title">Principal</div>
+
+      <button class="sidebar-link active" data-panel="dashboard" data-sub="Visão geral do sistema">
+        <span class="icon">📊</span>
+        <span class="link-text">Dashboard</span>
+      </button>
+
+      <div class="sidebar-section-title" style="margin-top:8px">Conteúdo</div>
+
+      <button class="sidebar-link" data-panel="empresa" data-sub="Informações e configurações da empresa">
+        <span class="icon">🏢</span>
+        <span class="link-text">Empresa</span>
+      </button>
+
+      <button class="sidebar-link" data-panel="servicos" data-sub="Gerencie os serviços prestados">
+        <span class="icon">⚙️</span>
+        <span class="link-text">Serviços</span>
+      </button>
+
+      <button class="sidebar-link" data-panel="depoimentos" data-sub="Depoimentos de clientes">
+        <span class="icon">💬</span>
+        <span class="link-text">Depoimentos</span>
+      </button>
+
+      <button class="sidebar-link" data-panel="clientes" data-sub="Clientes que autorizam divulgação">
+        <span class="icon">🏭</span>
+        <span class="link-text">Clientes</span>
+      </button>
+
+      <div class="sidebar-section-title" style="margin-top:8px">Comunicação</div>
+
+      <button class="sidebar-link" data-panel="contatos" data-sub="Mensagens recebidas pelo formulário">
+        <span class="icon">📩</span>
+        <span class="link-text">Mensagens</span>
+      </button>
+
+      <div style="padding:12px 8px 4px;font-family:var(--font-mono);font-size:9px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase">
+        Conta
+      </div>
+
+      <div style="padding:8px 10px;font-family:var(--font-mono);font-size:11px;color:var(--muted)">
+        <span id="sidebar-user"></span>
+      </div>
+
+    </nav>
+
+    <div class="sidebar-footer">
+      <a href="index.html" class="sidebar-link" target="_blank" rel="noopener" style="color:var(--secondary)">
+        <span class="icon">🌐</span>
+        <span class="link-text">Ver Site</span>
+      </a>
+      <button class="btn-logout" id="btn-logout">
+        <span>🚪</span> Sair
+      </button>
+    </div>
+  </aside>
+
+  <!-- ═══════════ MAIN ═══════════ -->
+  <div class="admin-main">
+
+    <!-- Topbar -->
+    <div class="admin-topbar">
+      <div>
+        <div class="admin-topbar-title" id="topbar-title">Dashboard</div>
+        <div class="admin-topbar-subtitle" id="topbar-sub">Visão geral do sistema</div>
+      </div>
+      <button id="btn-sidebar-toggle" style="display:none;padding:8px;background:none;border:1px solid var(--outline-var);cursor:pointer;color:var(--on-surface);font-size:18px" aria-label="Abrir menu">☰</button>
+    </div>
+
+    <div class="admin-content">
+
+      <!-- ══════════════════════════
+           PAINEL: DASHBOARD
+           ══════════════════════════ -->
+      <div class="admin-panel active" id="panel-dashboard">
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-value" id="stat-services">—</div>
+            <div class="stat-label">Serviços</div>
+          </div>
+          <div class="stat-card" style="--accent: var(--secondary)">
+            <div class="stat-value" id="stat-testimonials">—</div>
+            <div class="stat-label">Depoimentos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-clients">—</div>
+            <div class="stat-label">Clientes</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value" id="stat-contacts">—</div>
+            <div class="stat-label">Mensagens</div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <div class="admin-card-title">⚡ Início Rápido</div>
+              <div class="admin-card-subtitle">Acesso rápido às ações mais comuns</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+            <button class="btn btn-add" onclick="document.querySelector('[data-panel=empresa]').click()" style="justify-content:flex-start;padding:14px 20px">
+              🏢 Editar Dados da Empresa
+            </button>
+            <button class="btn btn-add" onclick="document.querySelector('[data-panel=servicos]').click();document.getElementById('btn-add-service').click()" style="justify-content:flex-start;padding:14px 20px">
+              ➕ Adicionar Serviço
+            </button>
+            <button class="btn btn-add" onclick="document.querySelector('[data-panel=depoimentos]').click();document.getElementById('btn-add-testimonial').click()" style="justify-content:flex-start;padding:14px 20px">
+              💬 Adicionar Depoimento
+            </button>
+            <button class="btn btn-add" onclick="document.querySelector('[data-panel=clientes]').click();document.getElementById('btn-add-client').click()" style="justify-content:flex-start;padding:14px 20px">
+              🏭 Adicionar Cliente
+            </button>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <div class="admin-card-title">🔧 Status do Sistema</div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg);border:1px solid var(--outline-var)">
+              <span style="font-family:var(--font-mono);font-size:12px">Firebase Firestore</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--tertiary);border:1px solid rgba(49,227,104,0.3);padding:2px 10px">● CONECTADO</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg);border:1px solid var(--outline-var)">
+              <span style="font-family:var(--font-mono);font-size:12px">Firebase Storage</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--tertiary);border:1px solid rgba(49,227,104,0.3);padding:2px 10px">● ATIVO</span>
+            </div>
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--bg);border:1px solid var(--outline-var)">
+              <span style="font-family:var(--font-mono);font-size:12px">Autenticação Admin</span>
+              <span style="font-family:var(--font-mono);font-size:11px;color:var(--tertiary);border:1px solid rgba(49,227,104,0.3);padding:2px 10px">● AUTENTICADO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════
+           PAINEL: EMPRESA
+           ══════════════════════════ -->
+      <div class="admin-panel" id="panel-empresa">
+        <div id="empresa-alert" class="alert"></div>
+
+        <form id="empresa-form">
+          <!-- Identidade -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <div class="admin-card-title">🏢 Identidade da Empresa</div>
+                <div class="admin-card-subtitle">Nome, lema e informações principais</div>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group full">
+                <label class="form-label" for="empresa-name">Nome da Empresa *</label>
+                <input class="form-input" type="text" id="empresa-name" name="name" required placeholder="Ex: Usinagem e Solda de Precisão"/>
+              </div>
+              <div class="form-group full">
+                <label class="form-label" for="empresa-slogan">Lema / Slogan</label>
+                <input class="form-input" type="text" id="empresa-slogan" placeholder="Ex: Precisão que transforma metal em excelência"/>
+              </div>
+              <div class="form-group full">
+                <label class="form-label" for="empresa-about">História / Sobre a Empresa</label>
+                <textarea class="form-textarea" id="empresa-about" rows="5" style="min-height:140px" placeholder="Descreva a história e missão da empresa..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Contato -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <div class="admin-card-title">📞 Informações de Contato</div>
+                <div class="admin-card-subtitle">Dados exibidos no site e no botão WhatsApp</div>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label" for="empresa-phone">Telefone</label>
+                <input class="form-input" type="tel" id="empresa-phone" placeholder="(00) 0000-0000"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="empresa-email">E-mail</label>
+                <input class="form-input" type="email" id="empresa-email" placeholder="contato@empresa.com.br"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="empresa-whatsapp">WhatsApp (somente números, com código do país)</label>
+                <input class="form-input" type="text" id="empresa-whatsapp" placeholder="5511999990000"/>
+                <span class="form-hint">Ex: 5511999990000 → 55 (Brasil) + 11 (DDD) + número</span>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="empresa-cnpj">CNPJ</label>
+                <input class="form-input" type="text" id="empresa-cnpj" placeholder="00.000.000/0001-00"/>
+              </div>
+              <div class="form-group full">
+                <label class="form-label" for="empresa-address">Endereço Completo</label>
+                <input class="form-input" type="text" id="empresa-address" placeholder="Rua, número, bairro, cidade - estado"/>
+              </div>
+            </div>
+          </div>
+
+          <!-- Imagens -->
+          <div class="admin-card">
+            <div class="admin-card-header">
+              <div>
+                <div class="admin-card-title">🖼️ Imagens</div>
+                <div class="admin-card-subtitle">Logo e imagem de capa do site</div>
+              </div>
+            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label class="form-label">Logo da Empresa</label>
+                <div class="upload-area">
+                  <input type="file" id="empresa-logo-file" accept="image/*"/>
+                  <div class="upload-icon">🖼️</div>
+                  <div class="upload-label">Clique ou arraste a imagem<br/><span>Formatos: PNG, SVG, WEBP</span></div>
+                  <img id="empresa-logo-preview" class="upload-preview" src="" alt="Preview logo" style="display:none"/>
+                </div>
+                <div class="progress-bar-wrap" id="logo-progress">
+                  <div class="progress-bar-fill"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Imagem do Hero (Capa)</label>
+                <div class="upload-area">
+                  <input type="file" id="empresa-hero-file" accept="image/*"/>
+                  <div class="upload-icon">🌆</div>
+                  <div class="upload-label">Clique ou arraste a imagem<br/><span>Recomendado: 1920×1080px</span></div>
+                  <img id="empresa-hero-preview" class="upload-preview" src="" alt="Preview hero" style="display:none"/>
+                </div>
+                <div class="progress-bar-wrap" id="hero-progress">
+                  <div class="progress-bar-fill"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;justify-content:flex-end;margin-top:8px">
+            <button type="submit" class="btn btn-save" id="btn-save-empresa">
+              💾 Salvar Empresa
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- ══════════════════════════
+           PAINEL: SERVIÇOS
+           ══════════════════════════ -->
+      <div class="admin-panel" id="panel-servicos">
+        <div id="services-alert" class="alert"></div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <div class="admin-card-title">⚙️ Serviços Prestados</div>
+              <div class="admin-card-subtitle">Gerencie todos os serviços exibidos no site</div>
+            </div>
+            <button class="btn btn-add" id="btn-add-service">➕ Adicionar Serviço</button>
+          </div>
+          <div id="services-list">
+            <div class="empty-state"><div class="empty-icon">⏳</div>Carregando...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════
+           PAINEL: DEPOIMENTOS
+           ══════════════════════════ -->
+      <div class="admin-panel" id="panel-depoimentos">
+        <div id="testimonials-alert" class="alert"></div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <div class="admin-card-title">💬 Depoimentos de Clientes</div>
+              <div class="admin-card-subtitle">Exibidos no carrossel do site</div>
+            </div>
+            <button class="btn btn-add" id="btn-add-testimonial">➕ Adicionar Depoimento</button>
+          </div>
+          <div id="testimonials-list">
+            <div class="empty-state"><div class="empty-icon">⏳</div>Carregando...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════
+           PAINEL: CLIENTES
+           ══════════════════════════ -->
+      <div class="admin-panel" id="panel-clientes">
+        <div id="clients-alert" class="alert"></div>
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <div class="admin-card-title">🏭 Clientes</div>
+              <div class="admin-card-subtitle">Empresas que autorizaram a divulgação do logo</div>
+            </div>
+            <button class="btn btn-add" id="btn-add-client">➕ Adicionar Cliente</button>
+          </div>
+          <div id="clients-list">
+            <div class="empty-state"><div class="empty-icon">⏳</div>Carregando...</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════
+           PAINEL: CONTATOS
+           ══════════════════════════ -->
+      <div class="admin-panel" id="panel-contatos">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <div>
+              <div class="admin-card-title">📩 Mensagens Recebidas</div>
+              <div class="admin-card-subtitle">Formulários enviados pelo site</div>
+            </div>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="contacts-table">
+              <thead>
+                <tr>
+                  <th>Remetente</th>
+                  <th>Telefone</th>
+                  <th>Assunto / Mensagem</th>
+                  <th>Data</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="contacts-tbody">
+                <tr><td colspan="5" style="text-align:center;padding:40px;color:var(--muted)">⏳ Carregando...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-layout -->
+
+<!-- ══════════ MODAL: SERVIÇO ══════════ -->
+<div class="modal-overlay" id="modal-service" role="dialog" aria-modal="true" aria-labelledby="svc-modal-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="svc-modal-title">Adicionar Serviço</div>
+      <button class="modal-close" onclick="closeModal('modal-service')" aria-label="Fechar">✕</button>
+    </div>
+    <form id="svc-form">
+      <input type="hidden" id="svc-id"/>
+      <div class="modal-body">
+        <div class="form-grid" style="gap:16px">
+          <div class="form-group">
+            <label class="form-label" for="svc-icon">Emoji / Ícone</label>
+            <input class="form-input" type="text" id="svc-icon" placeholder="Ex: ⚙️ 🔧 🔩 📐"/>
+            <span class="form-hint">Cole um emoji representativo do serviço</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="svc-order">Ordem de exibição</label>
+            <input class="form-input" type="number" id="svc-order" placeholder="0" min="0"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="svc-title">Título do Serviço *</label>
+            <input class="form-input" type="text" id="svc-title" required placeholder="Ex: Usinagem CNC"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="svc-desc">Descrição</label>
+            <textarea class="form-textarea" id="svc-desc" rows="3" placeholder="Descreva brevemente o serviço..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cancel" onclick="closeModal('modal-service')">Cancelar</button>
+        <button type="submit" class="btn btn-save" id="btn-save-service">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════ MODAL: DEPOIMENTO ══════════ -->
+<div class="modal-overlay" id="modal-testimonial" role="dialog" aria-modal="true" aria-labelledby="test-modal-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="test-modal-title">Adicionar Depoimento</div>
+      <button class="modal-close" onclick="closeModal('modal-testimonial')" aria-label="Fechar">✕</button>
+    </div>
+    <form id="test-form">
+      <input type="hidden" id="test-id"/>
+      <div class="modal-body">
+        <div class="form-grid" style="gap:16px">
+          <div class="form-group">
+            <label class="form-label" for="test-name">Nome do Cliente *</label>
+            <input class="form-input" type="text" id="test-name" required placeholder="João Silva"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="test-stars">Avaliação (estrelas)</label>
+            <select class="form-input form-select" id="test-stars">
+              <option value="5">★★★★★ (5)</option>
+              <option value="4">★★★★☆ (4)</option>
+              <option value="3">★★★☆☆ (3)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="test-role">Cargo</label>
+            <input class="form-input" type="text" id="test-role" placeholder="Engenheiro de Produção"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="test-company">Empresa</label>
+            <input class="form-input" type="text" id="test-company" placeholder="Metalúrgica XYZ"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="test-text">Depoimento *</label>
+            <textarea class="form-textarea" id="test-text" required rows="4" placeholder="O que o cliente disse sobre a empresa..."></textarea>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Foto do Cliente (opcional)</label>
+            <div class="upload-area">
+              <input type="file" id="test-photo-file" accept="image/*"/>
+              <div class="upload-icon">👤</div>
+              <div class="upload-label">Clique para enviar foto<br/><span>Recomendado: quadrada, mín. 100×100px</span></div>
+              <img id="test-photo-preview" class="upload-preview" src="" alt="Preview foto" style="display:none"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cancel" onclick="closeModal('modal-testimonial')">Cancelar</button>
+        <button type="submit" class="btn btn-save" id="btn-save-testimonial">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ══════════ MODAL: CLIENTE ══════════ -->
+<div class="modal-overlay" id="modal-client" role="dialog" aria-modal="true" aria-labelledby="cli-modal-title">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title" id="cli-modal-title">Adicionar Cliente</div>
+      <button class="modal-close" onclick="closeModal('modal-client')" aria-label="Fechar">✕</button>
+    </div>
+    <form id="cli-form">
+      <input type="hidden" id="cli-id"/>
+      <div class="modal-body">
+        <div class="form-grid" style="gap:16px">
+          <div class="form-group">
+            <label class="form-label" for="cli-name">Nome da Empresa *</label>
+            <input class="form-input" type="text" id="cli-name" required placeholder="Ex: Metalúrgica Alfa S.A."/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="cli-order">Ordem de exibição</label>
+            <input class="form-input" type="number" id="cli-order" placeholder="0" min="0"/>
+          </div>
+          <div class="form-group full">
+            <label class="form-label">Logo do Cliente</label>
+            <div class="upload-area">
+              <input type="file" id="cli-logo-file" accept="image/*"/>
+              <div class="upload-icon">🏭</div>
+              <div class="upload-label">Clique para enviar o logo<br/><span>PNG transparente recomendado</span></div>
+              <img id="cli-logo-preview" class="upload-preview" src="" alt="Preview logo" style="display:none"/>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cancel" onclick="closeModal('modal-client')">Cancelar</button>
+        <button type="submit" class="btn btn-save" id="btn-save-client">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Toast Notification Container -->
+<div class="admin-toast-container" id="admin-toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ══════════ CONFIRM DIALOG ══════════ -->
+<div class="confirm-overlay" id="confirm-dialog" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">
+  <div class="confirm-box">
+    <div class="confirm-icon" id="confirm-icon">⚠️</div>
+    <div class="confirm-title" id="confirm-title">Confirmar</div>
+    <div class="confirm-message" id="confirm-message">Tem certeza?</div>
+    <div class="confirm-actions">
+      <button class="btn btn-cancel" id="confirm-cancel">Cancelar</button>
+      <button class="btn btn-delete" id="confirm-ok">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Mobile toggle visibility
+  if (window.innerWidth <= 900) {
+    document.getElementById('btn-sidebar-toggle').style.display = 'flex';
+  }
+  window.addEventListener('resize', () => {
+    const btn = document.getElementById('btn-sidebar-toggle');
+    if (btn) btn.style.display = window.innerWidth <= 900 ? 'flex' : 'none';
+  });
+</script>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

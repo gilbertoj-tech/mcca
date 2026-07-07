@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login — Área Administrativa</title>
+  <meta name="robots" content="noindex, nofollow"/>
+  <link rel="icon" type="image/svg+xml" href="assets/placeholder-logo.svg"/>
+  <link rel="stylesheet" href="css/admin.css"/>
+</head>
+<body>
+
+<div class="login-dot-grid" aria-hidden="true"></div>
+
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-logo-wrap">
+      <img class="login-logo" src="assets/placeholder-logo.svg" alt="Logo da empresa" id="login-logo"/>
+      <div class="login-title" id="login-company-name">Painel Administrativo</div>
+      <div class="login-subtitle">ÁREA RESTRITA · ACESSO AUTORIZADO</div>
+    </div>
+
+    <div id="login-alert" class="alert"></div>
+
+    <form id="login-form" novalidate>
+      <div class="form-group" style="margin-bottom:16px">
+        <label class="form-label" for="login-email">E-mail</label>
+        <input class="form-input" type="email" id="login-email" name="email"
+          required autocomplete="email" placeholder="admin@empresa.com.br"/>
+      </div>
+
+      <div class="form-group" style="margin-bottom:24px">
+        <label class="form-label" for="login-password">Senha</label>
+        <input class="form-input" type="password" id="login-password" name="password"
+          required autocomplete="current-password" placeholder="••••••••"/>
+      </div>
+
+      <button type="submit" class="btn-login" id="btn-login">
+        ⚡ Entrar no Painel
+      </button>
+    </form>
+
+    <a href="index.html" class="login-back">← Voltar ao site</a>
+  </div>
+</div>
+
+<script type="module">
+  import { redirectIfLoggedIn, login } from './js/auth.js';
+  import { db } from './js/firebase-config.js';
+  import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+  // Redirect if already logged in
+  redirectIfLoggedIn();
+
+  // Try to load company name for branding
+  (async () => {
+    try {
+      const snap = await getDoc(doc(db, 'company', 'main'));
+      if (snap.exists()) {
+        const d = snap.data();
+        if (d.name) document.getElementById('login-company-name').textContent = d.name;
+        if (d.logoUrl) document.getElementById('login-logo').src = d.logoUrl;
+      }
+    } catch {}
+  })();
+
+  // Login form
+  document.getElementById('login-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = document.getElementById('btn-login');
+    const alert = document.getElementById('login-alert');
+    const email    = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Entrando...';
+    alert.className = 'alert';
+
+    try {
+      await login(email, password);
+      // requireAuth will redirect to admin.html
+    } catch (err) {
+      const msgs = {
+        'auth/invalid-credential': 'E-mail ou senha incorretos.',
+        'auth/user-not-found':     'Usuário não encontrado.',
+        'auth/wrong-password':     'Senha incorreta.',
+        'auth/too-many-requests':  'Muitas tentativas. Aguarde alguns minutos.',
+        'auth/network-request-failed': 'Erro de rede. Verifique sua conexão.'
+      };
+      alert.textContent = msgs[err.code] || ('Erro: ' + err.message);
+      alert.className = 'alert alert-error show';
+      btn.disabled = false;
+      btn.innerHTML = '⚡ Entrar no Painel';
+    }
+  });
+</script>
+</body>
+</html>

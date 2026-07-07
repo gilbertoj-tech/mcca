@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Usinagem e Solda de Precisão</title>
+  <meta name="description" content="Especialistas em usinagem CNC e soldagem de precisão. Qualidade e pontualidade garantidas."/>
+  <meta name="robots" content="index, follow"/>
+  <meta property="og:title" content="Usinagem e Solda de Precisão"/>
+  <meta property="og:description" content="Especialistas em usinagem CNC e soldagem de precisão."/>
+  <meta property="og:type" content="website"/>
+  <link rel="icon" type="image/svg+xml" href="assets/placeholder-logo.svg"/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress" id="scroll-progress" role="progressbar" aria-label="Progresso da página"></div>
+
+<!-- Dot Grid Background -->
+<div class="dot-grid" aria-hidden="true"></div>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="navbar" role="navigation" aria-label="Navegação principal">
+  <div class="navbar-inner">
+    <a class="navbar-brand" href="#hero" aria-label="Página inicial">
+      <img id="nav-logo" class="navbar-logo" src="assets/placeholder-logo.svg" alt="Logo da empresa"/>
+      <span id="nav-name" class="navbar-name">Usinagem e Solda de Precisão</span>
+    </a>
+
+    <ul class="navbar-links" role="list">
+      <li><a href="#sobre">SOBRE</a></li>
+      <li><a href="#servicos">SERVIÇOS</a></li>
+      <li><a href="#depoimentos">DEPOIMENTOS</a></li>
+      <li><a href="#clientes">CLIENTES</a></li>
+      <li><a href="#contato">CONTATO</a></li>
+    </ul>
+
+    <a href="#contato" class="btn-quote" data-scroll-to="#contato">SOLICITAR ORÇAMENTO</a>
+
+    <button class="navbar-mobile-toggle" id="mobile-toggle" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Nav Overlay -->
+<nav class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Menu mobile">
+  <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Fechar menu">✕</button>
+  <a href="#sobre" >Sobre</a>
+  <a href="#servicos">Serviços</a>
+  <a href="#depoimentos">Depoimentos</a>
+  <a href="#clientes">Clientes</a>
+  <a href="#contato">Contato</a>
+  <a href="#contato" class="btn-quote" style="margin-top:16px">SOLICITAR ORÇAMENTO</a>
+</nav>
+
+<main>
+
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="hero" id="hero" aria-labelledby="hero-heading">
+    <div class="hero-bg">
+      <img id="hero-bg-img"
+        src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1920&q=70"
+        alt="Usinagem industrial de precisão"
+        loading="eager"/>
+      <div class="hero-bg-overlay"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-tag">Especialistas em Precisão Industrial</div>
+
+      <h1 id="hero-heading" class="hero-title">
+        <span id="hero-name">Usinagem e Solda de Precisão</span>
+      </h1>
+
+      <p class="hero-slogan" id="hero-slogan">
+        Precisão que transforma metal em excelência.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contato" class="btn-primary" data-scroll-to="#contato">
+          ✦ Solicitar Orçamento
+        </a>
+        <a href="#servicos" class="btn-secondary" data-scroll-to="#servicos">
+          Ver Serviços →
+        </a>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="metric">
+          <div class="metric-value">±0,005<span style="font-size:0.5em">mm</span></div>
+          <div class="metric-label">Tolerância</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">15+</div>
+          <div class="metric-label">Anos de experiência</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">500+</div>
+          <div class="metric-label">Projetos entregues</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">100%</div>
+          <div class="metric-label">Qualidade garantida</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SOBRE ═══════════ -->
+  <section class="section" id="sobre" aria-labelledby="sobre-heading">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <div class="section-label">Nossa história</div>
+          <h2 id="sobre-heading" class="section-title">Excelência forjada<br/>com anos de dedicação</h2>
+          <div style="margin-top:24px">
+            <p id="about-text">
+              Somos especializados em usinagem CNC e soldagem de precisão, atendendo indústrias que exigem o mais alto padrão de qualidade. Nossa equipe de profissionais altamente qualificados utiliza equipamentos de última geração para entregar peças e conjuntos com tolerâncias que superam as especificações técnicas.
+            </p>
+          </div>
+        </div>
+
+        <div class="about-image-wrap fade-in">
+          <img
+            src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=800&q=70"
+            alt="Profissional realizando soldagem de precisão"
+            loading="lazy"/>
+          <div class="about-coord">USP // COORD: 23°34'S · 46°38'O</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SERVIÇOS ═══════════ -->
+  <section class="section section-alt" id="servicos" aria-labelledby="servicos-heading">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">O que fazemos</div>
+        <h2 id="servicos-heading" class="section-title">Nossos Serviços</h2>
+        <p class="section-subtitle">Soluções completas em usinagem e soldagem para sua indústria.</p>
+      </div>
+
+      <!-- Skeleton while loading -->
+      <div id="services-grid" class="services-grid" role="list" aria-label="Lista de serviços">
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+        <div class="skeleton skeleton-card"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ DEPOIMENTOS ═══════════ -->
+  <section class="section" id="depoimentos" aria-labelledby="depoimentos-heading">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">O que dizem</div>
+        <h2 id="depoimentos-heading" class="section-title">Depoimentos de Clientes</h2>
+        <p class="section-subtitle">A opinião de quem confia no nosso trabalho.</p>
+      </div>
+
+      <div class="testimonials-wrapper">
+        <div class="testimonials-track" id="testimonials-track" role="list" aria-label="Depoimentos">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="testimonials-controls" role="group" aria-label="Controles do carrossel">
+        <button class="testimonials-btn" id="testimonials-prev" aria-label="Anterior">&#8592;</button>
+        <div class="testimonials-dots" id="testimonials-dots" role="tablist"></div>
+        <button class="testimonials-btn" id="testimonials-next" aria-label="Próximo">&#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CLIENTES ═══════════ -->
+  <section class="section section-alt" id="clientes" aria-labelledby="clientes-heading">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">Quem confia em nós</div>
+        <h2 id="clientes-heading" class="section-title">Nossos Clientes</h2>
+        <p class="section-subtitle">Empresas que nos escolheram como parceiro de precisão.</p>
+      </div>
+
+      <div id="clients-grid" class="clients-grid" role="list" aria-label="Clientes">
+        <div class="skeleton skeleton-client"></div>
+        <div class="skeleton skeleton-client"></div>
+        <div class="skeleton skeleton-client"></div>
+        <div class="skeleton skeleton-client"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CONTATO ═══════════ -->
+  <section class="section" id="contato" aria-labelledby="contato-heading">
+    <div class="container">
+      <div class="fade-in">
+        <div class="section-label">Fale conosco</div>
+        <h2 id="contato-heading" class="section-title">Entre em Contato</h2>
+        <p class="section-subtitle">Solicite seu orçamento sem compromisso.</p>
+      </div>
+
+      <div class="contact-grid">
+        <!-- Informações de contato -->
+        <div class="contact-info fade-in">
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📞</div>
+            <div>
+              <div class="contact-info-label">Telefone</div>
+              <div class="contact-info-value" id="contact-phone">(00) 0000-0000</div>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📧</div>
+            <div>
+              <div class="contact-info-label">E-mail</div>
+              <div class="contact-info-value" id="contact-email">contato@empresa.com.br</div>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">💬</div>
+            <div>
+              <div class="contact-info-label">WhatsApp</div>
+              <a id="contact-whatsapp-link" href="#" class="contact-info-value" style="color:var(--tertiary)" target="_blank" rel="noopener">
+                Clique para conversar
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-info-icon">📍</div>
+            <div>
+              <div class="contact-info-label">Endereço</div>
+              <div class="contact-info-value" id="contact-address">Seu endereço completo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulário -->
+        <form class="contact-form fade-in" id="contact-form" novalidate>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div class="form-group">
+              <label class="form-label" for="form-name">Nome *</label>
+              <input class="form-input" type="text" id="form-name" name="name" required placeholder="Seu nome completo"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-email">E-mail *</label>
+              <input class="form-input" type="email" id="form-email" name="email" required placeholder="seu@email.com"/>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+            <div class="form-group">
+              <label class="form-label" for="form-phone">Telefone</label>
+              <input class="form-input" type="tel" id="form-phone" name="phone" placeholder="(00) 00000-0000"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="form-subject">Assunto</label>
+              <input class="form-input" type="text" id="form-subject" name="subject" placeholder="Ex: Orçamento de peças"/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="form-message">Mensagem *</label>
+            <textarea class="form-textarea" id="form-message" name="message" required placeholder="Descreva sua necessidade..."></textarea>
+          </div>
+
+          <div id="form-feedback" class="form-feedback" role="alert"></div>
+
+          <button type="submit" class="btn-submit" id="btn-contact-submit">
+            ✦ Enviar Mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img id="footer-logo" class="footer-logo" src="assets/placeholder-logo.svg" alt="Logo"/>
+        <div id="footer-name" class="footer-name">Usinagem e Solda de Precisão</div>
+        <p id="footer-slogan" class="footer-slogan">Precisão que transforma metal em excelência.</p>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Navegação</div>
+        <ul class="footer-links">
+          <li><a href="#sobre">Sobre Nós</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#depoimentos">Depoimentos</a></li>
+          <li><a href="#clientes">Clientes</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Contato</div>
+        <ul class="footer-links">
+          <li><span id="footer-phone">(00) 0000-0000</span></li>
+          <li><span id="footer-email">contato@empresa.com.br</span></li>
+        </ul>
+        <div style="margin-top:20px">
+          <a href="admin.html" style="font-family:var(--font-mono);font-size:10px;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;border:1px solid var(--outline-var);padding:6px 14px;display:inline-block;transition:all 0.2s" onmouseover="this.style.color='var(--primary-ctr)';this.style.borderColor='var(--primary-ctr)'" onmouseout="this.style.color='var(--muted)';this.style.borderColor='var(--outline-var)'">
+            ⚙ Área Admin
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-copy">
+        © <span id="footer-year"></span> Usinagem e Solda de Precisão. Todos os direitos reservados.
+      </span>
+      <span class="footer-copy" style="color:var(--outline-var)">
+        <span style="font-family:var(--font-mono);font-size:10px">CNPJ: </span>
+        <span id="footer-cnpj" style="font-family:var(--font-mono);font-size:10px">00.000.000/0001-00</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════ WHATSAPP FLOAT ═══════════ -->
+<a href="https://wa.me/5500000000000" id="whatsapp-btn" class="whatsapp-float" target="_blank" rel="noopener noreferrer" aria-label="Contato via WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- Toast Notification Container -->
+<div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<script>
+  // Set footer year
+  document.getElementById('footer-year').textContent = new Date().getFullYear();
+</script>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
