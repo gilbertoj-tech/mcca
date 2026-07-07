@@ -9,7 +9,7 @@ import {
   doc, getDoc, setDoc, collection,
   getDocs, addDoc, updateDoc, deleteDoc,
   query, orderBy, serverTimestamp, Timestamp
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+} from "./firebase/firebase-firestore.js";
 
 /* ─── Utility ────────────────────────────────────────────────────────────── */
 const $ = (sel, ctx = document) => ctx.querySelector(sel);

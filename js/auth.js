@@ -8,7 +8,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+} from "./firebase/firebase-auth.js";
 
 /**
  * Redireciona para login.html se o usuário não estiver autenticado.

@@ -7,7 +7,7 @@ import { db } from './firebase-config.js';
 import {
   doc, getDoc, collection, getDocs, addDoc,
   query, orderBy, serverTimestamp
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+} from "./firebase/firebase-firestore.js";
 
 /* ─── Default / Fallback Data ────────────────────────────────────────────── */
 const DEFAULTS = {

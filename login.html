@@ -47,7 +47,7 @@
 <script type="module">
   import { redirectIfLoggedIn, login } from './js/auth.js';
   import { db } from './js/firebase-config.js';
-  import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { doc, getDoc } from "./js/firebase/firebase-firestore.js";
 
   // Redirect if already logged in
   redirectIfLoggedIn();

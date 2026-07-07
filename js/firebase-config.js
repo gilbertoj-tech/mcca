@@ -7,9 +7,9 @@
    Consulte o arquivo SETUP.md para instruções detalhadas.
    ============================================= */
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { initializeApp } from "./firebase/firebase-app.js";
+import { getFirestore } from "./firebase/firebase-firestore.js";
+import { getAuth } from "./firebase/firebase-auth.js";
 
 // ─── SUBSTITUA ESTAS CREDENCIAIS ─────────────────────────────────────────────
 const firebaseConfig = {
