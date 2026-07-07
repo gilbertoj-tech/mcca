@@ -14,12 +14,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-aut
 
 // ─── SUBSTITUA ESTAS CREDENCIAIS ─────────────────────────────────────────────
 const firebaseConfig = {
-  apiKey:            "SUA_API_KEY_AQUI",
-  authDomain:        "SEU_PROJETO.firebaseapp.com",
-  projectId:         "SEU_PROJETO_ID",
-  storageBucket:     "SEU_PROJETO.firebasestorage.app",
-  messagingSenderId: "SEU_MESSAGING_SENDER_ID",
-  appId:             "SEU_APP_ID"
+  apiKey:            "AIzaSyDXo0JhTzWfNCrkfjK_qqc3N8Vfy10UVI8",
+  authDomain:        "mcca-usinagem.firebaseapp.com",
+  projectId:         "mcca-usinagem",
+  storageBucket:     "mcca-usinagem.firebasestorage.app",
+  messagingSenderId: "634453897974",
+  appId:             "1:634453897974:web:3a7b2b80719d29281132d7"
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
