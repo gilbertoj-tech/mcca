@@ -149,7 +149,10 @@ async function loadStats() {
 async function loadCompanyForm() {
   try {
     const snap = await getDoc(doc(db, 'company', 'main'));
-    if (!snap.exists()) return;
+    if (!snap.exists()) {
+      showToast('Nenhum dado encontrado', 'Preencha o formulário e salve para criar os dados da empresa.', 'info');
+      return;
+    }
     const d = snap.data();
     const fields = ['name','slogan','cnpj','phone','email','whatsapp','address','about'];
     fields.forEach(f => {
@@ -164,7 +167,11 @@ async function loadCompanyForm() {
       const prev = $('#empresa-hero-preview');
       if (prev) { prev.src = d.heroImage; prev.style.display = 'block'; }
     }
-  } catch (e) { console.warn('Empresa load:', e.message); }
+    showToast('Dados carregados', 'Informações da empresa carregadas com sucesso.', 'success', 2500);
+  } catch (e) {
+    showToast('Erro ao carregar', 'Firebase não configurado. Configure as credenciais em js/firebase-config.js seguindo o SETUP.md. Detalhes: ' + e.message, 'error', 6000);
+    console.warn('Empresa load:', e.message);
+  }
 }
 
 function setupCompanyForm() {
